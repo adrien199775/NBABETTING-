@@ -1,0 +1,41 @@
+import random
+
+class NBAPlayer:
+    def __init__(self, name):
+        self.name = name
+        self.stats = {
+            'points': 0,
+            'rebounds': 0,
+            'assists': 0,
+            'steals': 0,
+            'blocks': 0
+        }
+    
+    def generate_fake_stats(self):
+        self.stats['points'] = random.randint(10, 30)
+        self.stats['rebounds'] = random.randint(2, 12)
+        self.stats['assists'] = random.randint(2, 10)
+        self.stats['steals'] = random.randint(1, 5)
+        self.stats['blocks'] = random.randint(0, 5)
+
+class NBAStatsAnalyzer:
+    def __init__(self, players):
+        self.players = players
+    
+    def generate_fake_stats(self):
+        for player in self.players:
+            player.generate_fake_stats()
+
+    def analyze_stats(self):
+        # Algorithm to analyze stats and suggest best bets
+        # For simplicity, let's just select the player with the highest total points
+        best_player = max(self.players, key=lambda player: player.stats['points'])
+        print(f"Best player to bet on: {best_player.name}, Points: {best_player.stats['points']}")
+
+if __name__ == "__main__":
+    player_names = ["LeBron James", "Stephen Curry", "DeAaron Fox", "DeAndre Ayton", "Nikola Jokic", "Player6", "Player7", "Player8", "Player9", "Player10"]
+    players = [NBAPlayer(name) for name in player_names]
+    
+    analyzer = NBAStatsAnalyzer(players)
+    analyzer.generate_fake_stats()
+    analyzer.analyze_stats()
